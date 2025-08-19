@@ -14,7 +14,199 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      badges: {
+        Row: {
+          condition_type: string
+          condition_value: number
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          name: string
+        }
+        Insert: {
+          condition_type: string
+          condition_value: number
+          created_at?: string
+          description: string
+          icon: string
+          id?: string
+          name: string
+        }
+        Update: {
+          condition_type?: string
+          condition_value?: number
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      patterns: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          difficulty: string
+          expected_output: string
+          hints: string[] | null
+          id: string
+          pattern_code: string
+          points: number
+          test_cases: Json | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          difficulty: string
+          expected_output: string
+          hints?: string[] | null
+          id?: string
+          pattern_code: string
+          points?: number
+          test_cases?: Json | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          difficulty?: string
+          expected_output?: string
+          hints?: string[] | null
+          id?: string
+          pattern_code?: string
+          points?: number
+          test_cases?: Json | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          patterns_completed: number
+          rank: number | null
+          streak_count: number
+          total_points: number
+          updated_at: string
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          patterns_completed?: number
+          rank?: number | null
+          streak_count?: number
+          total_points?: number
+          updated_at?: string
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          patterns_completed?: number
+          rank?: number | null
+          streak_count?: number
+          total_points?: number
+          updated_at?: string
+          user_id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      user_badges: {
+        Row: {
+          badge_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          badge_id: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          badge_id?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_badges_badge_id_fkey"
+            columns: ["badge_id"]
+            isOneToOne: false
+            referencedRelation: "badges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_progress: {
+        Row: {
+          attempts: number
+          completed_at: string | null
+          created_at: string
+          id: string
+          pattern_id: string
+          points_earned: number | null
+          status: string
+          updated_at: string
+          user_id: string
+          user_solution: string | null
+        }
+        Insert: {
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          pattern_id: string
+          points_earned?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          user_solution?: string | null
+        }
+        Update: {
+          attempts?: number
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          pattern_id?: string
+          points_earned?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          user_solution?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_progress_pattern_id_fkey"
+            columns: ["pattern_id"]
+            isOneToOne: false
+            referencedRelation: "patterns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
