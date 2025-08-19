@@ -6,10 +6,10 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { Code, Lock, User } from 'lucide-react';
+import { Code, Lock, User, Chrome } from 'lucide-react';
 
 const Auth = () => {
-  const { signUp, signIn } = useAuth();
+  const { signUp, signIn, signInWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
   const [signUpData, setSignUpData] = useState({
     email: '',
@@ -132,6 +132,24 @@ const Auth = () => {
                   </Button>
                 </CardFooter>
               </form>
+              <div className="relative my-4">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={signInWithGoogle}
+                disabled={loading}
+              >
+                <Chrome className="mr-2 h-4 w-4" /> Google
+              </Button>
             </Card>
           </TabsContent>
 
