@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Play, Code, Star, Trophy, Users } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Hero = () => {
+  const { user } = useAuth();
+
   return (
     <section className="min-h-screen bg-gradient-hero flex items-center justify-center pt-20">
       <div className="container mx-auto px-6 py-20">
@@ -28,14 +32,18 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="primary" size="lg" className="group">
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                Start Learning
-              </Button>
-              <Button variant="secondary" size="lg">
-                <Code className="w-5 h-5 mr-2" />
-                View Patterns
-              </Button>
+              <Link to={user ? "/dashboard" : "/auth"}>
+                <Button variant="primary" size="lg" className="group">
+                  <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  {user ? "Go to Dashboard" : "Start Learning"}
+                </Button>
+              </Link>
+              <Link to="/patterns">
+                <Button variant="secondary" size="lg">
+                  <Code className="w-5 h-5 mr-2" />
+                  View Patterns
+                </Button>
+              </Link>
             </div>
 
             {/* Stats */}

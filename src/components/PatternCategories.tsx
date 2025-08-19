@@ -2,8 +2,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star, Triangle, Hash, Type, Zap, Brain, ArrowRight, CheckCircle, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PatternCategories = () => {
+  const { user } = useAuth();
+  
   const categories = [
     {
       id: 1,
@@ -167,13 +171,15 @@ const PatternCategories = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    variant="primary" 
-                    className="w-full group-hover:shadow-primary transition-all duration-300"
-                  >
-                    Start Learning
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                  <Link to={user ? "/patterns" : "/auth"} className="w-full">
+                    <Button 
+                      variant="primary" 
+                      className="w-full group-hover:shadow-primary transition-all duration-300"
+                    >
+                      {user ? "Start Learning" : "Login to Start"}
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             );
